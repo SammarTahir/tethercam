@@ -1,0 +1,39 @@
+# XcodeGen spec. Generate the project with `xcodegen generate` (CI does this).
+# Never commit TetherCam.xcodeproj; edit this file instead.
+name: TetherCam
+options:
+  bundleIdPrefix: app.tethercam
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+
+packages:
+  TSMuxer:
+    path: TSMuxer
+
+settings:
+  base:
+    MARKETING_VERSION: "0.0.1"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+
+targets:
+  TetherCam:
+    type: application
+    platform: iOS
+    sources:
+      - path: TetherCam
+    dependencies:
+      - package: TSMuxer
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.tethercam.TetherCam
+        INFOPLIST_FILE: TetherCam/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1"
+        # Unsigned build. Users sign the IPA with their own free Apple ID.
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_IDENTITY: ""
+        DEVELOPMENT_TEAM: ""
+    scheme: {}
